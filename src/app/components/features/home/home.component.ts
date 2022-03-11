@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
     'Discipline',
     'Wins',
     'Losses'
-  ]
+  ];
+
   public tableDisplayedProps: string[] = [
     'name',
     'lastname',
@@ -26,13 +27,11 @@ export class HomeComponent implements OnInit {
     'discipline',
     'wins',
     'losses'
-  ]
+  ];
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
   }
-
-
 
 }

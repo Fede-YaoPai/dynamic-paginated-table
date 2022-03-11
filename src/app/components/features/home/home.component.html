@@ -3,5 +3,11 @@
     [dataSource]="(fighters$ | async)!"
     [itemsPerPage]="5"
     [displayedColumns]="tableDisplayedColumns"
-    [displayedProps]="tableDisplayedProps"></app-paginated-table>
+    [displayedProps]="tableDisplayedProps"
+    [showIndex]="true"
+    [tableClasses]="['table', 'table-dark', 'table-striped']"
+    [paginatorClasses]="['pagination', 'justify-content-center']"
+    [paginatorItemClasses]="['page-item']"
+    [paginatorLinkClasses]="['page-link']">
+  </app-paginated-table>
 </div>

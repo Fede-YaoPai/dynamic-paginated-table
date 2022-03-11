@@ -1,14 +1,16 @@
 <div *ngIf="dataSource">
-  <table class="table table-striped">
+  <table [ngClass]="tableClasses ? tableClasses : 'paginated-table-fyp'">
     <thead>
       <tr>
-        <th *ngFor="let column of displayedColumns">
+        <th scope="col" *ngIf="showIndex">#</th>
+        <th *ngFor="let column of displayedColumns" scope="col">
           {{ column }}
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of renderTable(dataSource)">
+      <tr *ngFor="let item of renderTable(dataSource); let i = index">
+        <th scope="row" *ngIf="showIndex">{{ i + 1 }}</th>
         <td *ngFor="let prop of displayedProps">
           {{ item[prop] }}
         </td>
@@ -16,26 +18,38 @@
     </tbody>
   </table>
   <nav aria-label="Table page navigator">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" role="button" (click)="firstPage()">
-        <a class="page-link">««</a>
+    <ul [ngClass]="paginatorClasses ? paginatorClasses : 'paginator-fyp'">
+      <li
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        role="button"
+        (click)="firstPage()">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">««</a>
       </li>
-      <li class="page-item" role="button" (click)="previousPage()">
-        <a class="page-link">«</a>
+      <li
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        role="button"
+        (click)="previousPage()">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">«</a>
       </li>
       <li
         *ngFor="let paginatorItem of [].constructor(totalPages); let i = index;"
         role="button"
-        class="page-item"
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
         [ngClass]="{'active': currentPage == i + 1}"
         (click)="thisPage(i + 1)">
-        <a class="page-link">{{ i + 1 }}</a>
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">{{ i + 1 }}</a>
       </li>
-      <li class="page-item" (click)="nextPage()" role="button">
-        <a class="page-link">»</a>
+      <li
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        (click)="nextPage()"
+        role="button">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">»</a>
       </li>
-      <li class="page-item" role="button" (click)="lastPage()">
-        <a class="page-link">»»</a>
+      <li
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        role="button"
+        (click)="lastPage()">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">»»</a>
       </li>
     </ul>
   </nav>

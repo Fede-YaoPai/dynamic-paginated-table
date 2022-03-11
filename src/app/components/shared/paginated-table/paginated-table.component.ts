@@ -15,8 +15,13 @@ export class PaginatedTableComponent implements OnInit {
   @Input() dataSource!: any[];
   @Input() displayedColumns!: string[];
   @Input() displayedProps!: string[];
-
   @Input() itemsPerPage!: number;
+  @Input() showIndex: boolean = false;
+
+  @Input() tableClasses!: string[];
+  @Input() paginatorClasses!: string[];
+  @Input() paginatorItemClasses!: string[];
+  @Input() paginatorLinkClasses!: string[];
 
   public currentPage: number = 1;
   public totalPages: number = 0;
