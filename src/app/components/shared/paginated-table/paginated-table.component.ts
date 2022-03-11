@@ -23,6 +23,11 @@ export class PaginatedTableComponent implements OnInit {
   @Input() paginatorItemClasses!: string[];
   @Input() paginatorLinkClasses!: string[];
 
+  @Input() firstPageInnerHTML!: string;
+  @Input() previousPageInnerHTML!: string;
+  @Input() nextPageInnerHTML!: string;
+  @Input() lastPageInnerHTML!: string;
+
   public currentPage: number = 1;
   public totalPages: number = 0;
 
