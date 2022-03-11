@@ -1,0 +1,7 @@
+<div style="height: 100%; display: flex; justify-content: center; align-items: center">
+  <app-paginated-table
+    [dataSource]="(fighters$ | async)!"
+    [itemsPerPage]="5"
+    [displayedColumns]="tableDisplayedColumns"
+    [displayedProps]="tableDisplayedProps"></app-paginated-table>
+</div>
