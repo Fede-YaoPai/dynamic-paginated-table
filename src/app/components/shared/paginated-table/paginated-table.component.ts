@@ -149,4 +149,11 @@ export class PaginatedTableComponent implements OnInit {
     return classes;
   }
 
+  public getShownIndex(i: number): number {
+    let previousPages: number = this.currentPage - 1;
+    let shownIndex: number = (previousPages * this.itemsPerPage) + i;
+
+    return shownIndex;
+  }
+
 }
