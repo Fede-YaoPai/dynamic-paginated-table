@@ -16,6 +16,7 @@ export class PaginatedTableComponent implements OnInit {
   @Input() displayedColumns!: string[];
   @Input() displayedProps!: string[];
   @Input() itemsPerPage!: number;
+  @Input() maxDisplayedPages: number = 10;
   @Input() showIndex: boolean = false;
 
   @Input() tableClasses!: string[];
@@ -30,6 +31,11 @@ export class PaginatedTableComponent implements OnInit {
 
   public currentPage: number = 1;
   public totalPages: number = 0;
+  public maxPagesExceeded: boolean = false;
+
+  public readonly paginatorClass: string = 'paginator-fyp';
+  public readonly paginatorItemClass: string = 'paginator-item-fyp';
+  public readonly paginatorLinkClass: string = 'paginator-link-fyp';
 
   constructor() { }
 
@@ -80,7 +86,17 @@ export class PaginatedTableComponent implements OnInit {
   }
 
   private getTotalPages(array: any[]): number {
-    return Math.ceil(array.length / this.itemsPerPage)
+    let totalPages: number = Math.ceil(array.length / this.itemsPerPage);;
+
+    if (totalPages <= this.maxDisplayedPages) {
+      this.maxPagesExceeded = false;
+    }
+    else {
+      this.maxPagesExceeded = true;
+      totalPages = this.maxDisplayedPages - 1;
+    }
+
+    return totalPages;
   }
 
   private getSliceStart(): number {
@@ -117,6 +133,20 @@ export class PaginatedTableComponent implements OnInit {
 
   private isLastPage(): boolean {
     return this.currentPage == this.totalPages;
+  }
+
+  public getCustomPageStyle(i: number): string[] {
+    let classes: string[] = [];
+
+    if (this.paginatorItemClasses)
+      classes.push(...this.paginatorItemClasses)
+    else
+      classes.push('paginator-item-fyp')
+
+    if (this.currentPage == i)
+      classes.push('active');
+
+    return classes;
   }
 
 }

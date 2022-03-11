@@ -18,48 +18,47 @@
     </tbody>
   </table>
   <nav aria-label="Table page navigator">
-    <ul [ngClass]="paginatorClasses ? paginatorClasses : 'paginator-fyp'">
+    <ul [ngClass]="paginatorClasses ? paginatorClasses : paginatorClass">
       <li
-        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : paginatorItemClass"
         role="button"
         (click)="firstPage()">
         <a
-          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'"
+          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="firstPageInnerHTML ? firstPageInnerHTML : '««'">
         </a>
       </li>
       <li
-        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : paginatorItemClass"
         role="button"
         (click)="previousPage()">
         <a
-          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'"
+          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="previousPageInnerHTML ? previousPageInnerHTML : '«'">
         </a>
       </li>
       <li
         *ngFor="let paginatorItem of [].constructor(totalPages); let i = index;"
         role="button"
-        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
-        [ngClass]="{'active': currentPage == i + 1}"
+        [ngClass]="getCustomPageStyle(i + 1)"
         (click)="thisPage(i + 1)">
-        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'">{{ i + 1 }}</a>
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ i + 1 }}</a>
       </li>
       <li
-        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : paginatorItemClass"
         (click)="nextPage()"
         role="button">
         <a
-          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'"
+          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="nextPageInnerHTML ? nextPageInnerHTML : '»'">
         </a>
       </li>
       <li
-        [ngClass]="paginatorItemClasses ? paginatorItemClasses : 'paginator-item-fyp'"
+        [ngClass]="paginatorItemClasses ? paginatorItemClasses : paginatorItemClass"
         role="button"
         (click)="lastPage()">
         <a
-          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : 'paginator-link-fyp'"
+          [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="lastPageInnerHTML ? lastPageInnerHTML : '»»'"></a>
       </li>
     </ul>
