@@ -38,11 +38,23 @@
         </a>
       </li>
       <li
-        *ngFor="let paginatorItem of [].constructor(totalPages); let i = index;"
+        *ngFor="let paginatorItem of getPagesArray(); let i = index;"
         role="button"
-        [ngClass]="getCustomPageStyle(i + 1)"
-        (click)="thisPage(i + 1)">
-        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ i + 1 }}</a>
+        [ngClass]="getCustomPageStyle(i + paginatorSlideFactor)"
+        (click)="thisPage(i + paginatorSlideFactor)">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ i + paginatorSlideFactor }}</a>
+      </li>
+      <li
+        *ngIf="maxPagesExceeded"
+        role="button">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">...</a>
+      </li>
+      <li
+        *ngIf="maxPagesExceeded"
+        role="button"
+        [ngClass]="getCustomPageStyle(totalPages)"
+        (click)="thisPage(totalPages)">
+        <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ totalPages }}</a>
       </li>
       <li
         [ngClass]="paginatorItemClasses ? paginatorItemClasses : paginatorItemClass"

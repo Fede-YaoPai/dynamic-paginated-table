@@ -1,11 +1,12 @@
 <div style="height: 100%; display: flex; justify-content: center; align-items: center">
   <app-paginated-table
     [dataSource]="(fighters$ | async)!"
-    [itemsPerPage]="5"
     [displayedColumns]="tableDisplayedColumns"
     [displayedProps]="tableDisplayedProps"
+    [rowsPerPage]="4"
     [showIndex]="true"
     [tableClasses]="['table', 'table-dark', 'table-striped']"
+    [maxDisplayedPaginatorItems]="6"
     [paginatorClasses]="['pagination', 'justify-content-center']"
     [paginatorItemClasses]="['page-item']"
     [paginatorLinkClasses]="['page-link']">
