@@ -55,7 +55,7 @@
       <li
         *ngFor="let paginatorItem of getPagesArray(); let i = index;"
         role="button"
-        [ngClass]="getCustomPageStyle(i + paginatorSlideFactor)"
+        [ngClass]="getCustomPaginatorItemStyle(i + paginatorSlideFactor)"
         (click)="thisPage(i + paginatorSlideFactor)">
         <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ i + paginatorSlideFactor }}</a>
       </li>
@@ -67,7 +67,7 @@
       <li
         *ngIf="maxPagesExceeded"
         role="button"
-        [ngClass]="getCustomPageStyle(totalPages)"
+        [ngClass]="getCustomPaginatorItemStyle(totalPages)"
         (click)="thisPage(totalPages)">
         <a [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass">{{ totalPages }}</a>
       </li>

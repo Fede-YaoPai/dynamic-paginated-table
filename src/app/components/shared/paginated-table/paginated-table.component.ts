@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface displayedPropsValidity {
   valid: boolean,
@@ -32,6 +32,8 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
   @Input() previousPageInnerHTML!: string;
   @Input() nextPageInnerHTML!: string;
   @Input() lastPageInnerHTML!: string;
+
+  @Output() pageChanged = new EventEmitter<number>();
 
   public currentPage: number = 1;
   public totalPages: number = 0;
@@ -130,6 +132,8 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
     if (this.paginatorSlideFactor > 1) {
       this.paginatorSlideFactor = 1;
     }
+
+    this.emitPageChanged(this.currentPage);
   }
 
   public previousPage(): void {
@@ -139,6 +143,8 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
       if (this.currentPage != this.totalPages - 1)
         this.paginatorSlideFactor--;
     }
+
+    this.emitPageChanged(this.currentPage);
   }
 
   public nextPage(): void {
@@ -149,6 +155,8 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
         this.paginatorSlideFactor++;
       }
     }
+
+    this.emitPageChanged(this.currentPage);
   }
 
   public lastPage(): void {
@@ -157,10 +165,14 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
     if (this.maxPagesExceeded) {
       this.paginatorSlideFactor = this.totalPages - this.getPagesArray().length;
     }
+
+    this.emitPageChanged(this.currentPage);
   }
 
   public thisPage(page: number): void {
     this.currentPage = page;
+
+    this.emitPageChanged(this.currentPage);
   }
 
   private isFirstPage(): boolean {
@@ -171,7 +183,7 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
     return this.currentPage == this.totalPages;
   }
 
-  public getCustomPageStyle(i: number): string[] {
+  public getCustomPaginatorItemStyle(i: number): string[] {
     let classes: string[] = [];
 
     if (this.paginatorItemClasses)
@@ -199,7 +211,19 @@ export class PaginatedTableComponent implements OnInit, AfterViewInit {
   }
 
   public setRowsPerPage(rowsPerPage: number): void {
-    if (this.rowsPerPageOptions) this.rowsPerPage = rowsPerPage;
+    if (this.rowsPerPageOptions) {
+      this.rowsPerPage = rowsPerPage;
+
+      setTimeout(() => {
+        if (this.currentPage > this.totalPages)
+          this.currentPage = 1;
+      }, 0);
+
+    }
+  }
+
+  private emitPageChanged(currentPage: number): void {
+    this.pageChanged.emit(currentPage);
   }
 
 }
