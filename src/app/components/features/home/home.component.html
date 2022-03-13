@@ -5,10 +5,15 @@
     [displayedProps]="tableDisplayedProps"
     [rowsPerPage]="4"
     [showIndex]="true"
+    [fixedLayout]="true"
     [tableClasses]="['table', 'table-dark', 'table-striped']"
+    [selectRowsPerPage]="true"
+    [rowsPerPageOptions]="[6, 10]"
+    [rowsPerPageOptionsLabel]="'Rows per page'"
     [maxDisplayedPaginatorItems]="6"
     [paginatorClasses]="['pagination', 'justify-content-center']"
     [paginatorItemClasses]="['page-item']"
-    [paginatorLinkClasses]="['page-link']">
+    [paginatorLinkClasses]="['page-link']"
+    [rowsPerPageSelectClasses]="['form-select']">
   </app-paginated-table>
 </div>

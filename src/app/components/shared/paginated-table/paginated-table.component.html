@@ -1,5 +1,18 @@
-<div *ngIf="dataSource">
-  <table [ngClass]="tableClasses ? tableClasses : 'paginated-table-fyp'">
+<div *ngIf="dataSource" [class]="tableWrapperClass">
+  <div style="padding: 12px 6px; display: flex; align-items: center" *ngIf="selectRowsPerPage">
+    <p style="margin-bottom: 0; white-space: nowrap;">{{ rowsPerPageOptionsLabel }}:&nbsp;&nbsp;</p>
+    <select
+      #rowsPerPageSelect
+      role="button"
+      [ngClass]="rowsPerPageSelectClasses ? rowsPerPageSelectClasses : rowsPerPageSelectClass"
+      style="width: fit-content;"
+      (change)="setRowsPerPage(+rowsPerPageSelect.value)">
+      <option *ngFor="let rowsPerPageOption of rowsPerPageOptions" [value]="rowsPerPageOption">
+        {{ rowsPerPageOption }}
+      </option>
+    </select>
+  </div>
+  <table [ngClass]="tableClasses ? tableClasses : tableClass" [ngStyle]="{'table-layout': fixedLayout ? 'fixed' : ''}">
     <thead>
       <tr>
         <th scope="col" *ngIf="showIndex">#</th>
@@ -24,6 +37,7 @@
         role="button"
         (click)="firstPage()">
         <a
+          style="user-select: none;"
           [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="firstPageInnerHTML ? firstPageInnerHTML : '««'">
         </a>
@@ -33,6 +47,7 @@
         role="button"
         (click)="previousPage()">
         <a
+          style="user-select: none;"
           [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="previousPageInnerHTML ? previousPageInnerHTML : '«'">
         </a>
@@ -61,6 +76,7 @@
         (click)="nextPage()"
         role="button">
         <a
+          style="user-select: none;"
           [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="nextPageInnerHTML ? nextPageInnerHTML : '»'">
         </a>
@@ -70,6 +86,7 @@
         role="button"
         (click)="lastPage()">
         <a
+          style="user-select: none;"
           [ngClass]="paginatorLinkClasses ? paginatorLinkClasses : paginatorLinkClass"
           [innerHTML]="lastPageInnerHTML ? lastPageInnerHTML : '»»'"></a>
       </li>
