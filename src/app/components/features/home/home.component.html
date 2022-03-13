@@ -1,5 +1,5 @@
 <div style="height: 100%; display: flex; justify-content: center; align-items: center">
-  <app-paginated-table
+  <paginated-table-fyp
     [dataSource]="(fighters$ | async)!"
     [displayedColumns]="tableDisplayedColumns"
     [displayedProps]="tableDisplayedProps"
@@ -15,5 +15,5 @@
     [paginatorItemClasses]="['page-item']"
     [paginatorLinkClasses]="['page-link']"
     [rowsPerPageSelectClasses]="['form-select']">
-  </app-paginated-table>
+  </paginated-table-fyp>
 </div>
